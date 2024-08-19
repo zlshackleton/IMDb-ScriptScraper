@@ -18,25 +18,9 @@ soup = BeautifulSoup(content, 'lxml')
 
 # Find the table with the list of scripts
 box = soup.find('td', attrs={'valign': 'top', 'width': None, 'class': None})
-# --- soup.find() Searches for the first td element with the specified attributes
- 
+
 links = [link['href'] for link in box.find_all('a', href=True)]
-'''
-If box.find_all('a', href=True) returns a list of <a> tags like this:
 
-[<a href="script1.html">Script 1</a>, <a href="script2.html">Script 2</a>]
-
-The list comprehension extracts the href attributes:
-
-['script1.html', 'script2.html']
-
-Breakdown:
-
-Find box: Locate the <td> element. | soup.find()
-Find all <a> tags: Extract all <a> tags within box that have an href attribute. | find_all()
-Extract href values: Create a list of href values from these tags. | ['href']
-(Zach, its basically being read backwards and href can be accesed like indexes.)
-'''
 # If dir does not exist make one
 if not os.path.exists('scripts'):
     os.makedirs('scripts')
