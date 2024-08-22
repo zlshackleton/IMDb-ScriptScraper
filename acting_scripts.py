@@ -49,14 +49,11 @@ for link in links:
         script_content = script_soup.find('pre')
         if script_content:
             script_text = script_content.get_text()
-        else:
-            script_text = "ERROR No script content retrieved."
-        
+
+            # Write the script to a file
+            script_filename = os.path.join('scripts', f'{santitize_filename(script_title)}.txt')
+            with open(script_filename, 'w', encoding='utf-8') as file:
+                file.write(script_text)
+
     else:
         print(f"No 'Read Script' link found for {script_title}.")
-        
-    # Write the script to a file
-    script_filename = os.path.join('scripts', f'{santitize_filename(script_title)}.txt')
-    with open(script_filename, 'w', encoding='utf-8') as file:
-        file.write(script_text)
-
